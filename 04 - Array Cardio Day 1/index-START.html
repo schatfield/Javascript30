@@ -80,25 +80,41 @@
 
     // 5. Sort the inventors by years lived
 
-    const oldest = inventors.sort(function(a,b){
+    const oldestGuy = inventors.sort(function(a,b){
       // make variable to use for our condtional that willset the confines of what we want to keep
       const lastGuy = a.passed - a.year;
-      const nextGuy = b.passed - b-year;
+      const nextGuy = b.passed - b.year;
       return lastGuy > nextGuy ? -1 : 1;
     });
-    console.log(oldest);
+    console.log(oldestGuy);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-    
+
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
+    const lastName = people.sort(function(lastOne, nextOne) {
+      const [aLast, aFirst] = lastOne.split(', ');
+      const [bLast, abirst] = nextOne.split(', ');
+      return aLast > bLast ? 1 : -1;
+    });
+    //console.log(lastName);
+
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+
+    const transportation = data.reduce(function(object, item) {
+       if(!object[item]) {
+         ojbect[item] = 0; 
+       }
+       object[item]++;
+        return object;
+    }, {});
 
   </script>
 </body>
