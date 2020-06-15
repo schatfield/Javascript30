@@ -65,10 +65,19 @@
 
     // Array.prototype.findIndex() -find where something is inside the array
     // Find the comment with this ID
-    // delete the comment with the ID of 823423
+    // delete the comment with the ID of 823423 - to delete we couls use .splice
 
   const index = comments.findIndex(comment => comment.id === 823423);
   console.log(index);
+
+  //to delete we could use .splice() - takes items out of an array, mutable method and will affect original array
+  //comments.splice(index, 1);
+
+  //OR we can create a new array with the update
+  //use .slice()- immutable
+
+  const newComments = [...comments.slice(0, index), ...comments.slice(index) +1];
+  console.log(newComments);
   
   </script>
 </body>
