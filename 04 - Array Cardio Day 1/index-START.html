@@ -50,13 +50,23 @@
     // return an array
     //each item in the array should have the inventors first and last names
 
-  
-                            // Before ARROW: thing in that array // After AAROW: from the thing in the array we are going to return this
-   //const fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
-    //console.log(fullNames);
+            // Before ARROW: thing in that array // After AAROW: from the thing in the array we are going to return this
+   const fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+   console.log(fullNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+
+    const ordered = inventors.sort(function(a, b) {
+      if (a.year > b.year) {
+        return 1;
+      } else {
+        return -1;
+      }
+    }) 
+    console.log(ordered);
+
+    const orderedInventors = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
 
     const birthdays = inventors.sort(function(firstPerson, secondPerson) {
       if(firstPerson.year > secondPerson.year) {
@@ -72,7 +82,7 @@
     });
     console.log(oldest);
                                                             //condition    //if that condition is true return 1 otherwise return -1
-    const orderedBirthday = inventors.sort((a, b) => a.year > b.year ?1 : -1);
+    const orderedBirthday = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
