@@ -182,6 +182,47 @@
     </li>
   </ul>
 <script>
+// this says hey grab anything with a data-time attribute on it
+//Array.from () converts something into an array. in this case we are converting a node list
+const  timeNodes = Array.from(document.querySelectorAll('[data-time]'));
+console.log(timeNodes);
+
+//now we want to do turn this node list into time strings
+// to do that you first need to change the node list into an array
+//to do this you can either use the spread operator to make a copy or you can run Array.from around the whole document.querySelectorAll
+//node lists look like arays but they don't have the same methods available to them
+
+//this first part takes an array of li items and turns into an array of strings (this string are the timestamps)
+const seconds = timeNodes
+   .map(node => node.dataset.time)
+  //timeCode is variable holding what we get back from the timeNode 
+  // Now we want to turn the time strings into just seconds- we are going to split on the srting to break it into minutes and seconds
+    .map(timeCode => {
+    //destructuring- creates 2 variables. whatever was on the left side of the : will go into mins and thr right side will go into secs. 
+    //they will be returned as strings becasue they started as strings- we need to convert them to numbers to math with them. 
+    //the parseFloat function will run against the result array of the last .map parseFloat will return the string as numbers
+      const [mins, secs] = timeCode.split(':').map(parseFloat);
+      return (mins * 60) + secs;
+    //console.log(mins, secs);
+    })
+    .reduce((total, vidSeconds) => total + vidSeconds);
+  //All this code above gives us the total number of seconds of all the videos
+  //Now we need to with the seconds variable s chop it down into hours and minutes and seconds
+
+  //this is how to do that
+  let secondsLeft = seconds;
+  const hours = Math.floor(secondsLeft / 3600);
+  // the modulo operator is used to figure out how many or what is left after an even distribution. 
+  // After we chunk this time out into whole minutes, this will tell us how many seconds are left over
+  secondsLeft = secondsLeft % 3600;
+
+  //no we we will do the same thing taking the value in the secondsLeft variable and using it in a new varaiable named mins to figure out how many seconds are leftover after we chunk the leftover seconds from above into minutes.
+  const mins = Math.floor(secondsLeft / 60);
+  secondsLeft = secondsLeft % 60;
+
+  console.log(hours, mins, secondsLeft);
+
+  //You could also do this whole thing in a single reduce
 </script>
 </body>
 </html>
