@@ -9,14 +9,38 @@
   <script>
     // start with strings, numbers and booleans
 
+    //if you change th original variable it isn't going to update the other one
+    let age = 100;
+    let age2 = age;
+    console.log(age, age2);
+
+    age = 200;
+    console.log(age, age2);
+
+    let name = 'shawna';
+    let name2 = name;
+    console.log(name, name2);
+
+    name = 'shawna shooshoo'
+   
+    console.log(name, name2);
+
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
 
+    //this is actually just a reference and not a copy
+    const team = players;
+    console.log(players, team);
+
     // You might think we can just do something like this:
 
-    // however what happens when we update that array?
+    team[3] = 'lux';
+    console.log(players, team);
+
+    // however what happens when we update the "team" array?
+    //it alters the original array "players"
 
     // now here is the problem!
 
@@ -25,14 +49,25 @@
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
     // So, how do we fix this? We take a copy instead!
+    //.slice will return the entire array if you pass it nothing
+    const team2 = players.slice()
+
 
     // one way
 
     // or create a new array and concat the old one in
+    const team3 = [].concat(players);
 
     // or use the new ES6 Spread
 
+    const team4 = [...players];
+
     // now when we update it, the original one isn't changed
+
+    team4[3] = 'sally';
+    //const teamGrow = team4.push('sally');
+
+    //console.log(teamGrow);
 
     // The same thing goes for objects, let's say we have a person object
 
@@ -43,8 +78,15 @@
     };
 
     // and think we make a copy:
+    //this is just creating a refercne and will change your original object
+    //you just made a new object and updated the original at the saem time here
+    const captain = person;
+    captain.number = 99;
 
     // how do we take a copy instead?
+    //Variable, Object.assign, empty object, object you want to copy, properties you want to change
+   const cap2 = Object.assign({}, person, {number: 79, age:12});
+
 
     // We will hopefully soon see the object ...spread
 
